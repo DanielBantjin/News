@@ -29,7 +29,7 @@ class SettingsController extends Controller
             Log::error('No authenticated user found.');
             return response()->json([
                 'status' => 'error',
-                'message' => 'No authenticated user found.'
+                'message' => 'No authenticated user found.',
             ], 401);
         }
 
@@ -37,25 +37,23 @@ class SettingsController extends Controller
 
         if (!Hash::check($request->current_password, $user->password)) {
             Log::warning('Current password validation failed for user ID: ' . $user->id);
-
             return response()->json([
                 'status' => 'error',
-                'message' => 'The current password is incorrect.'
+                'message' => 'The current password is incorrect.',
             ], 400);
         }
 
-        $user->password = Hash::make($request->new_password);
-        if ($user->save()) {
+        if ($user->updatePassword($request->new_password)) {
             Log::info('Password successfully updated for user ID: ' . $user->id);
             return response()->json([
                 'status' => 'success',
-                'message' => 'Password updated successfully!'
+                'message' => 'Password updated successfully!',
             ]);
         } else {
             Log::error('Failed to update password for user ID: ' . $user->id);
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to update password.'
+                'message' => 'Failed to update password.',
             ], 500);
         }
     }

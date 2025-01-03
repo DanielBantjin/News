@@ -12,46 +12,58 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'username', 'password', 'theme_preference', 'gmail_connected'
+        'name',
+        'email',
+        'username',
+        'password',
+        'theme_preference',
+        'gmail_connected',
     ];
 
     protected $hidden = [
-        'password', 'remember_token'
+        'password',
+        'remember_token',
     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
         'theme_preference' => 'string',
-        'gmail_connected' => 'boolean'
+        'gmail_connected' => 'boolean',
     ];
 
+    /**
+     * Mutator for automatically hashing passwords when set.
+     */
     public function setPasswordAttribute($value)
     {
+        // Menggunakan Hash::make untuk meng-hash password jika password diberikan
         $this->attributes['password'] = Hash::make($value);
     }
 
+
+    /**
+     * Update the user's password and verify it after saving.
+     *
+     * @param string $newPassword
+     * @return bool
+     */
     public function updatePassword(string $newPassword): bool
     {
-        $hashedPassword = Hash::make($newPassword);
-        Log::info('Generated hashed password: ', ['hashed' => $hashedPassword]);
-
-        $this->password = $hashedPassword;
+        $this->password = $newPassword; // Mutator will handle hashing
         $result = $this->save();
 
-        // Reload the model and log the password after saving
         $this->refresh();
-        Log::info('Password retrieved from database: ', ['hashed' => $this->password]);
+        Log::info('Password retrieved from database after save:', ['hashed' => $this->password]);
 
-        // Verify using Hash::check
         if (Hash::check($newPassword, $this->password)) {
             Log::info('Password verification succeeded after update.');
+            return $result;
         } else {
-            Log::error('Password verification failed after update.');
-            return false; // Return false if verification fails
+            Log::error('Password verification failed after update.', [
+                'input_password' => $newPassword,
+                'hashed_password_in_db' => $this->password,
+            ]);
+            return false;
         }
-
-        Log::info('Password update operation completed.', ['success' => $result]);
-
-        return $result;
     }
 }
