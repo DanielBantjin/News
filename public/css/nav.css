@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,400;1,500;1,700;1,900&display=swap');
+
+/* Default theme (Light Mode) */
+:root {
+    --background-primary: #f5f5f5; /* Latar belakang utama (putih krem) */
+    --background-secondary: #830202; /* Elemen sekunder (merah tua) */
+    --background-gradient-secondary: #830202;
+    --text-primary: #ffffff; /* Teks utama */
+    --text-secondary: #000; /* Teks sekunder */
+    --text-link: #174b93; /* Teks untuk link */
+    --button-primary: #000; /* Tombol utama */
+    --button-hover: red; /* Tombol saat hover */
+    --button-text: #ffffff; /* Teks tombol */
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-primary: #0b0f19;
+        --background-secondary: #34495e;
+        --background-third: #141b29;
+        --background-gradient-primary: #2c3e50;
+        --background-gradient-secondary: #34495e;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b3c1;
+        --text-link: #61dafb;
+        --button-primary: #1a1a2e;
+        --button-hover: #16213e;
+        --button-text: #ffffff;
+    }
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--background-primary);
+}
