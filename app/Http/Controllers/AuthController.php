@@ -19,22 +19,24 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'username' => 'required|string|max:255|unique:users,username',
+            'password' => 'required|string|min:8|confirmed', // Pastikan password dikonfirmasi
         ]);
-
-        // Buat user baru
+    
+        // Membuat user baru dengan otomatis meng-hash password
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'username' => $request->username,
+            'password' => $request->password,  // Password otomatis di-hash
         ]);
-
-        // Login otomatis setelah register
+    
+        // Login otomatis setelah registrasi
         Auth::login($user);
-
-        // Redirect ke halaman tertentu
+    
         return redirect()->route('home')->with('success', 'Registrasi berhasil!');
     }
+    
 
     public function showLoginForm()
     {

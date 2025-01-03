@@ -61,13 +61,10 @@ Route::middleware([SetLocale::class])->group(function () {
         Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     });
     
-    //settings
     Route::middleware(['auth'])->group(function () {
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
-        Route::post('/settings/theme', [SettingsController::class, 'updateThemePreference'])->name('settings.updateTheme');
-        Route::post('/settings/language', [SettingsController::class, 'updateLanguagePreference'])->name('settings.updateLanguage');
-        Route::post('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.updatePassword');
-        Route::post('/settings/notifications', [SettingsController::class, 'updateNotifications'])->name('settings.updateNotifications');
+        Route::post('/settings/change-password', [SettingsController::class, 'changePassword'])->name('settings.changePassword');
     });
-
+    
+    
 });

@@ -5,56 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class SettingsController extends Controller
 {
-    // Menampilkan halaman pengaturan
     public function index()
     {
-        $user = Auth::user();
-        
-        // Memastikan data yang diteruskan ke view adalah tipe yang benar
-        $themePreference = is_string($user->theme_preference) ? $user->theme_preference : 'light';
-        $languagePreference = is_string(Session::get('locale')) ? Session::get('locale') : config('app.locale');
-        $notificationsEnabled = is_bool($user->notifications_enabled) ? $user->notifications_enabled : true;  // Default true
-
-        return view('settings', [
-            'themePreference' => $themePreference,
-            'languagePreference' => $languagePreference,
-            'notificationsEnabled' => $notificationsEnabled,
-        ]);
+        return view('settings');
     }
 
-    // Mengupdate preferensi tema
-    public function updateThemePreference(Request $request)
+    public function changePassword(Request $request)
     {
-        $request->validate([
-            'theme_preference' => 'required|in:light,dark',
-        ]);
+        Log::info('Password change request initiated.');
 
-        $user = Auth::user();
-        $user->update(['theme_preference' => $request->theme_preference]);
-
-        return redirect()->route('settings')->with('success', __('Theme preference updated.'));
-    }
-
-    // Mengupdate preferensi bahasa
-    public function updateLanguagePreference(Request $request)
-    {
-        $request->validate([
-            'language' => 'required|in:id,en',
-        ]);
-
-        $language = $request->input('language');
-        Session::put('locale', $language);
-
-        return redirect()->route('settings')->with('success', __('Language preference updated.'));
-    }
-
-    // Mengubah password pengguna
-    public function updatePassword(Request $request)
-    {
         $request->validate([
             'current_password' => 'required',
             'new_password' => 'required|min:8|confirmed',
@@ -62,24 +25,38 @@ class SettingsController extends Controller
 
         $user = Auth::user();
 
-        if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->back()->withErrors(['current_password' => __('Current password is incorrect.')]);
+        if (!$user) {
+            Log::error('No authenticated user found.');
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No authenticated user found.'
+            ], 401);
         }
 
-        $user->update(['password' => Hash::make($request->new_password)]);
-        return redirect()->route('settings')->with('success', __('Password updated successfully.'));
-    }
+        Log::info('Authenticated user:', ['id' => $user->id, 'email' => $user->email]);
 
-    // Mengubah preferensi notifikasi
-    public function updateNotifications(Request $request)
-    {
-        $request->validate([
-            'notifications_enabled' => 'required|boolean',
-        ]);
+        if (!Hash::check($request->current_password, $user->password)) {
+            Log::warning('Current password validation failed for user ID: ' . $user->id);
 
-        $user = Auth::user();
-        $user->update(['notifications_enabled' => $request->notifications_enabled]);
+            return response()->json([
+                'status' => 'error',
+                'message' => 'The current password is incorrect.'
+            ], 400);
+        }
 
-        return redirect()->route('settings')->with('success', __('Notification preference updated.'));
+        $user->password = Hash::make($request->new_password);
+        if ($user->save()) {
+            Log::info('Password successfully updated for user ID: ' . $user->id);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Password updated successfully!'
+            ]);
+        } else {
+            Log::error('Failed to update password for user ID: ' . $user->id);
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to update password.'
+            ], 500);
+        }
     }
 }
