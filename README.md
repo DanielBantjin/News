@@ -57,8 +57,8 @@ Blog:
 
 ### 1. **Clone Repository**
 ```bash
-git clone https://github.com/danielbantjin/news.git
-cd proyek-manajemen-artikel
+git clone https://github.com/DanielBantjin/News.git
+cd news
 ```
 
 ### 2. **Install Dependencies**
@@ -127,7 +127,28 @@ Buka browser dan akses `http://localhost:8000` untuk melihat aplikasi.
 - **Tailwind & Alpine.js** Framework front-end untuk styling.
 - **MySQL:** Database yang digunakan untuk pembuatan aplikasi.
 
-Link database : https://discord.com/channels/@me/904766580628521070/1325174080147816608
+Link database : https://drive.google.com/file/d/1d4hnwvQg9g9L_R2gRdgue6t3HoHiu449/view?usp=sharing
+
+## **Contact**
+      
+
+Email: danielbancin10@gmail.com
+
+GitHub: https://github.com/danielbantjin
+
+
+@Winnicode Garuda Teknologi.
+(img/logo.jpg)
+
+    
+    
+      
+    
+      
+    
+    
+      
+    
       
     
     
