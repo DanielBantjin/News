@@ -22,9 +22,9 @@
         scrolled: false,
         currentPath: window.location.pathname
     }" @scroll.window="scrolled = window.pageYOffset > 20"
-    :class="{ 'backdrop-blur-md': scrolled, 'bg-transparent': !scrolled }"
-    class="fixed w-full top-0 z-50 transition-all duration-300"
-    style="background-color: var(--background-secondary); color: var(--text-primary);">
+        :class="{ 'backdrop-blur-md': scrolled, 'bg-transparent': !scrolled }"
+        class="fixed w-full top-0 z-50 transition-all duration-300"
+        style="background-color: var(--background-secondary); color: var(--text-primary);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-20">
                 <!-- Logo Section -->
@@ -42,7 +42,8 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-6">
-                    <template x-for="(item, index) in [
+                    <template
+                        x-for="(item, index) in [
                         { name: 'Beranda', path: '/' },
                         { name: 'Artikel', path: '/articles' },
                         { name: 'Blog', path: '/blogs' }
@@ -97,7 +98,8 @@
 
             <!-- Mobile Menu -->
             <div x-show="isOpen" x-transition class="md:hidden px-2 pt-2 pb-3 space-y-1 bg-gray-900 rounded-lg">
-                <template x-for="(item, index) in [
+                <template
+                    x-for="(item, index) in [
                     { name: 'Beranda', path: '/' },
                     { name: 'Artikel', path: '/articles' },
                     { name: 'Blog', path: '/blogs' }
