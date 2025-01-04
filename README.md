@@ -137,9 +137,11 @@ Email: danielbancin10@gmail.com
 GitHub: https://github.com/danielbantjin
 
 
-@Winnicode Garuda Teknologi.
-<img src="public/img/logo.png" alt="Deskripsi Gambar" width="200" />
 
+
+
+<img src="public/img/logo2.png" alt="Deskripsi Gambar" width="200" />
+@Winnicode Garuda Teknologi.
 
 
 
