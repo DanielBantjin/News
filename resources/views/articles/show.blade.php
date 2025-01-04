@@ -25,7 +25,7 @@
         @if ($article->image)
             <div class="mb-6">
                 <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" 
-                     class="rounded-lg shadow-md">
+                     class="w-full h-auto rounded-lg shadow-md">
             </div>
         @endif
 

@@ -5,9 +5,9 @@
 @section('content')
 <main class="container mx-auto px-4 py-20">
     <div class="flex flex-wrap space-y-8 lg:flex-nowrap lg:space-y-0 lg:space-x-8">
-        <!-- Kolom Utama Blog -->
-        <div class="w-full lg:w-2/3">
-            <h1 class="text-3xl font-bold mb-6" style="color: var(--text-primary);">Blog Terbaru</h1>
+        <!-- Kolom Utama Blog --> 
+        <div class="w-full lg:w-2/3">                              
+            <h1 class="text-3xl font-bold mb-6" style="color: var(--text-primary);">Blog Terbaru</h1> 
             <div class="space-y-6">
                 @foreach ($blogs as $blog)
                     <div class="rounded-lg shadow-md overflow-hidden flex flex-col lg:flex-row"
@@ -22,13 +22,14 @@
                                     {{ $blog->category->name ?? 'Tanpa Kategori' }}
                                 </span>
                                 <h2 class="text-xl font-semibold mb-2">{{ $blog->title }}</h2>
+                                <!-- Perbaikan tulisan blog tanpa tag HTML -->
                                 <p class="text-sm mb-2 truncate" style="color: var(--text-secondary);">
-                                    {{ Str::limit($blog->content, 100, '...') }}
+                                    {{ Str::limit(strip_tags($blog->content), 50, '...') }}
                                 </p>
                             </div>
                             <div class="flex justify-between items-center text-sm" style="color: var(--text-secondary);">
                                 <span>
-                                    {{ $blog->author->name ?? 'Penulis Tidak Diketahui' }} -
+                                    {{ $blog->author->name ?? 'Penulis Tidak Diketahui' }} - 
                                     {{ $blog->published_at ? $blog->published_at->format('d F Y') : 'Belum Dipublikasikan' }}
                                 </span>
                                 <a href="{{ route('blogs.show', $blog->slug) }}"
@@ -61,7 +62,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 w-5 h-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1h-5l-2 4h7a1 1 0 011 1v2a1 1 0 01-1 1h-7l2 4H7l2-4H4a1 1 0 01-1-1v-2a1 1 0 011-1h7L9 7H4a1 1 0 01-1-1V4z" />
+                            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1h-5l-2 4h7a1 1 0 011 1v2a1 1 0 01-1 1h-7l2 4H7l2-4H4a1 1 0 01-1-1V4z" />
                     </svg>
                     Filter Kategori
                 </h3>
@@ -92,7 +93,9 @@
                             <div class="rounded-lg p-4"
                                  style="background-color: var(--background-secondary); color: var(--text-primary);">
                                 <h4 class="text-lg font-semibold mb-2">{{ $blog->title }}</h4>
-                                <p class="text-sm mb-2" style="color: var(--text-secondary);">{{ Str::limit($blog->content, 80) }}</p>
+                                <p class="text-sm mb-2" style="color: var(--text-secondary);">
+                                    {{ Str::limit(strip_tags($blog->content), 80) }}
+                                </p>
                                 <a href="{{ route('blogs.show', $blog->slug) }}"
                                     class="hover:underline"
                                     style="color: var(--text-link);">

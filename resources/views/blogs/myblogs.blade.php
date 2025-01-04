@@ -37,9 +37,9 @@
                         </span>
                     </p>
 
-                    <!-- Konten Singkat -->
+                    <!-- Konten Singkat tanpa tag HTML -->
                     <p class="text-sm mb-4" style="color: var(--text-secondary);">
-                        {{ Str::limit($blog->content, 100) }}
+                        {{ Str::limit(strip_tags($blog->content), 100) }}
                     </p>
 
                     <!-- Aksi -->

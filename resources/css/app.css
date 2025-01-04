@@ -4,16 +4,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,400;1,500;1,700;1,900&display=swap');
 
-/* Alternative Light Mode */
+/* Light Mode */
 :root {
-    --background-primary: #f8f9fa; /* Putih pucat untuk latar belakang utama */
-    --background-secondary: #cbcbcc; /* Abu muda untuk elemen sekunder */
-    --text-primary: #343a40; /* Hitam abu-abu untuk teks utama */
-    --text-secondary: #868e96; /* Abu terang untuk teks sekunder */
-    --text-link: #1d72b8; /* Biru netral untuk link */
-    --button-primary: #3b82f6; /* Biru segar untuk tombol */
-    --button-hover: #2563eb; /* Biru lebih gelap saat hover */
-    --button-text: #ffffff; /* Putih untuk teks tombol */
+    --background-primary: #f8f9fa; 
+    --background-secondary: #cbcbcc; 
+    --text-primary: #343a40; 
+    --text-secondary: #868e96; 
+    --text-link: #1d72b8; 
+    --button-primary: #3b82f6; 
+    --button-hover: #2563eb; 
+    --button-text: #ffffff; 
 }
 
 
