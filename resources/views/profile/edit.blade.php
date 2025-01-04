@@ -3,105 +3,88 @@
 @section('title', 'Edit Profil Saya')
 
 @section('content')
-    <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 py-20">
-        <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg p-8">
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Edit Profil Saya</h2>
+<div class="min-h-screen flex items-center justify-center py-20" style="background-color: var(--background-primary);">
+    <div class="w-full max-w-4xl rounded-lg shadow-lg p-8" style="background-color: var(--background-secondary); color: var(--text-primary);">
+        <h2 class="text-2xl font-bold text-center mb-6" style="color: var(--text-primary);">Edit Profil Saya</h2>
 
-            <!-- Form Edit Profile -->
-            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+        <!-- Form Edit Profile -->
+        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-                <!-- Input Foto Profil -->
-                <div class="col-span-2 flex items-center gap-4">
-                    <div>
-                        <img src="{{ Auth::user()->profile_picture_url ?? asset('images/default-profile.png') }}"
-                            alt="Foto Profil" class="w-20 h-20 rounded-full">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Upload Foto Profil</label>
-                        <input type="file" name="profile_picture"
-                            class="mt-2 block w-full text-sm text-gray-600 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500">
-                    </div>
+            <!-- Input Foto Profil -->
+            <div class="col-span-2 flex items-center gap-4 mb-4">
+                <div>
+                    <img src="{{ Auth::user()->profile_picture_url ?? asset('images/default-profile.png') }}" 
+                         alt="Foto Profil" class="w-20 h-20 rounded-full border-2 border-[var(--text-primary)]">
                 </div>
-
-                <!-- Full Name -->
-                <div class="col-span-2">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                    <input type="text" name="name" id="name" value="{{ old('name', Auth::user()->name) }}"
-                        class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-purple-500 focus:border-purple-500"
-                        required>
+                <div>
+                    <label class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Upload Foto Profil</label>
+                    <input type="file" name="profile_picture" 
+                           class="block w-full text-sm border rounded-lg shadow-sm p-2 focus:outline-none" 
+                           style="background-color: var(--background-primary); color: var(--text-primary); border-color: var(--text-secondary);">
                 </div>
+            </div>
 
-                <!-- Username -->
-                <div class="col-span-2">
-                    <label for="username" class="block text-sm font-medium text-gray-700">User Name</label>
-                    <input type="text" name="username" id="username"
-                        value="{{ old('username', Auth::user()->username) }}"
-                        class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-purple-500 focus:border-purple-500"
-                        required>
-                </div>
+            <!-- Input Fields -->
+            @php
+                $fields = [
+                    'name' => 'Full Name',
+                    'username' => 'User Name',
+                    'email' => 'Email',
+                    'contact' => 'Contact',
+                    'birthplace' => 'Birthplace',
+                    'birthdate' => 'Birthdate',
+                ];
+            @endphp
 
-                <!-- Email -->
-                <div class="col-span-2">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" id="email" value="{{ old('email', Auth::user()->email) }}"
-                        class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-purple-500 focus:border-purple-500"
-                        required>
+            @foreach ($fields as $field => $label)
+                <div class="col-span-2 mb-4">
+                    <label for="{{ $field }}" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">
+                        {{ $label }}
+                    </label>
+                    <input type="{{ $field === 'birthdate' ? 'date' : ($field === 'email' ? 'email' : 'text') }}" 
+                           name="{{ $field }}" 
+                           id="{{ $field }}" 
+                           value="{{ old($field, Auth::user()->$field) }}" 
+                           class="block w-full border rounded-lg shadow-sm p-2 focus:outline-none" 
+                           style="background-color: var(--background-primary); color: var(--text-primary); border-color: var(--text-secondary);" 
+                           {{ in_array($field, ['name', 'username', 'email']) ? 'required' : '' }}>
                 </div>
+            @endforeach
 
-                <!-- Contact -->
-                <div class="col-span-2">
-                    <label for="contact" class="block text-sm font-medium text-gray-700">Contact</label>
-                    <input type="text" name="contact" id="contact" value="{{ old('contact', Auth::user()->contact) }}"
-                        class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-purple-500 focus:border-purple-500">
-                </div>
+            <!-- Gender -->
+            <div class="col-span-2 mb-4">
+                <label for="gender" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">Gender</label>
+                <select name="gender" id="gender" 
+                        class="block w-full border rounded-lg shadow-sm p-2 focus:outline-none" 
+                        style="background-color: var(--background-primary); color: var(--text-primary); border-color: var(--text-secondary);">
+                    <option value="">Select Gender</option>
+                    <option value="Laki-laki" {{ old('gender', Auth::user()->gender) == 'Laki-laki' ? 'selected' : '' }}>
+                        Laki-laki
+                    </option>
+                    <option value="Perempuan" {{ old('gender', Auth::user()->gender) == 'Perempuan' ? 'selected' : '' }}>
+                        Perempuan
+                    </option>
+                </select>
+            </div>
 
-                <!-- Birthplace -->
-                <div class="col-span-2">
-                    <label for="birthplace" class="block text-sm font-medium text-gray-700">Birthplace</label>
-                    <input type="text" name="birthplace" id="birthplace"
-                        value="{{ old('birthplace', Auth::user()->birthplace) }}"
-                        class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-purple-500 focus:border-purple-500">
-                </div>
+            <!-- About Me -->
+            <div class="col-span-2 mb-6">
+                <label for="about_me" class="block text-sm font-medium mb-2" style="color: var(--text-secondary);">About Me</label>
+                <textarea name="about_me" id="about_me" rows="4" 
+                          class="block w-full border rounded-lg shadow-sm p-2 focus:outline-none" 
+                          style="background-color: var(--background-primary); color: var(--text-primary); border-color: var(--text-secondary);">{{ old('about_me', Auth::user()->about_me) }}</textarea>
+            </div>
 
-                <!-- Birthdate -->
-                <div class="col-span-2">
-                    <label for="birthdate" class="block text-sm font-medium text-gray-700">Birthdate</label>
-                    <input type="date" name="birthdate" id="birthdate"
-                        value="{{ old('birthdate', Auth::user()->birthdate) }}"
-                        class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-purple-500 focus:border-purple-500">
-                </div>
-
-                <!-- Gender -->
-                <div class="col-span-2">
-                    <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
-                    <select name="gender" id="gender"
-                        class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-purple-500 focus:border-purple-500">
-                        <option value="">Select Gender</option>
-                        <option value="Laki-laki"
-                            {{ old('gender', Auth::user()->gender) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                        <option value="Perempuan"
-                            {{ old('gender', Auth::user()->gender) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
-                    </select>
-                </div>
-
-                <!-- About Me -->
-                <div class="col-span-2">
-                    <label for="about_me" class="block text-sm font-medium text-gray-700">About Me</label>
-                    <textarea name="about_me" id="about_me"
-                        class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-purple-500 focus:border-purple-500"
-                        rows="4">{{ old('about_me', Auth::user()->about_me) }}</textarea>
-                </div>
-
-                <!-- Submit Button -->
-                <div class="col-span-2 flex justify-end">
-                    <button type="submit"
-                        class="bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-300">
-                        Save Changes
-                    </button>
-                </div>
-            </form>
-        </div>
+            <!-- Submit Button -->
+            <div class="col-span-2 flex justify-end">
+                <button type="submit" class="py-2 px-4 rounded-lg hover:shadow-md transition duration-300" 
+                        style="background-color: var(--button-primary); color: var(--button-text);">
+                    Save Changes
+                </button>
+            </div>
+        </form>
     </div>
+</div>
 @endsection

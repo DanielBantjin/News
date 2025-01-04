@@ -3,7 +3,7 @@
 
 @section('content')
 <main class="container mx-auto px-4 py-20">
-    <article class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+    <article class="max-w-3xl mx-auto rounded-xl shadow-lg overflow-hidden" style="background-color: var(--background-secondary); color: var(--text-primary);">
         <!-- Gambar Artikel -->
         @if ($article->image)
             <img src="{{ asset('storage/' . $article->image) }}" 
@@ -18,8 +18,8 @@
         <div class="p-6">
             <!-- Judul Artikel -->
             <header class="mb-6">
-                <h1 class="text-4xl font-bold text-gray-800">{{ $article->title }}</h1>
-                <div class="mt-2 text-sm text-gray-500 flex flex-wrap items-center gap-2">
+                <h1 class="text-4xl font-bold mb-4">{{ $article->title }}</h1>
+                <div class="mt-2 text-sm flex flex-wrap items-center gap-2" style="color: var(--text-secondary);">
                     <span>Ditulis oleh: <strong>{{ $article->author->name ?? 'Tidak diketahui' }}</strong></span>
                     <span class="mx-2">•</span>
                     <time>
@@ -27,19 +27,20 @@
                     </time>
                 </div>
                 <div class="mt-2">
-                    <span class="inline-block px-3 py-1 bg-blue-500 text-white text-xs font-medium rounded-full">
+                    <span class="inline-block px-3 py-1 text-xs font-medium rounded-full"
+                          style="background-color: var(--button-primary); color: var(--button-text);">
                         {{ $article->category->name ?? 'Tanpa Kategori' }}
                     </span>
                 </div>
             </header>
 
             <!-- Konten Artikel -->
-            <section class="text-gray-700 leading-relaxed">
+            <section class="leading-relaxed" style="color: var(--text-secondary);">
                 {!! nl2br(e($article->content)) !!}
             </section>
 
             <!-- Informasi Tambahan -->
-            <footer class="mt-8 text-sm text-gray-500">
+            <footer class="mt-8 text-sm" style="color: var(--text-secondary);">
                 <p>Dipublikasikan pada: 
                     {{ $article->created_at ? $article->created_at->format('d F Y') : 'Tanggal tidak tersedia' }}
                 </p>
@@ -51,7 +52,8 @@
             <!-- Navigasi Kembali -->
             <div class="mt-6">
                 <a href="{{ route('articles.index') }}" 
-                   class="text-blue-500 hover:underline">
+                   class="hover:underline"
+                   style="color: var(--text-link);">
                    « Kembali ke Artikel
                 </a>
             </div>

@@ -22,39 +22,40 @@
         scrolled: false,
         currentPath: window.location.pathname
     }" @scroll.window="scrolled = window.pageYOffset > 20"
-        :class="{ 'backdrop-blur-md bg-white/10': scrolled, 'bg-transparent': !scrolled }"
-        class="fixed w-full top-0 z-50 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-between h-20">
-                <!-- Logo Section -->
-                <div class="flex-shrink-0 flex items-center">
-                    <div class="flex items-center gap-3">
-                        <img class="h-10 w-10 rounded-lg object-cover" src="/img/logo.png" alt="Logo">
-                        <span class="text-white font-bold text-lg tracking-tight">
-                            Winnicode
-                            <span
-                                class="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">Garuda</span>
-                        </span>
-                    </div>
+    :class="{ 'backdrop-blur-md': scrolled, 'bg-transparent': !scrolled }"
+    class="fixed w-full top-0 z-50 transition-all duration-300"
+    style="background-color: var(--background-secondary); color: var(--text-primary);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between h-20">
+            <!-- Logo Section -->
+            <div class="flex-shrink-0 flex items-center">
+                <div class="flex items-center gap-3">
+                    <img class="h-10 w-10 rounded-lg object-cover" src="/img/logo.png" alt="Logo">
+                    <span class="font-bold text-lg tracking-tight">
+                        Winnicode
+                        <span class="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">Garuda</span>
+                    </span>
                 </div>
+            </div>
 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center gap-6">
-                    <template
-                        x-for="(item, index) in [
+            <div class="hidden md:flex items-center gap-6">
+                <template
+                    x-for="(item, index) in [
                         { name: 'Beranda', path: '/' },
                         { name: 'Artikel', path: '/articles' },
                         { name: 'Blog', path: '/blogs' }
                     ]">
-                        <a :href="item.path"
-                            class="relative group px-4 py-2 text-sm font-medium text-white transition duration-300"
-                            :class="{ 'text-purple-400': currentPath === item.path }">
-                            <span x-text="item.name"></span>
-                            <div class="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-pink-500 to-purple-500 group-hover:w-full transition-all duration-300"
-                                :class="{ 'w-full': currentPath === item.path }"></div>
-                        </a>
-                    </template>
-
+                    <a :href="item.path"
+                        class="relative group px-4 py-2 text-sm font-medium transition duration-300"
+                        style="color: var(--text-primary);"
+                        :class="{ 'text-[var(--text-link)]': currentPath === item.path }">
+                        <span x-text="item.name"></span>
+                        <div class="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-pink-500 to-purple-500 group-hover:w-full transition-all duration-300"
+                            :class="{ 'w-full': currentPath === item.path }"></div>
+                    </a>
+                </template>
+            </div>
                     <!-- Login/Logout/Profile -->
                     <div class="relative" @click.away="isProfileOpen = false">
                         @if (auth()->check())

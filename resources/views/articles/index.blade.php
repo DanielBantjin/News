@@ -3,13 +3,15 @@
 
 @section('content')
 <main class="container mx-auto px-4 py-20">
-    <h1 class="text-4xl font-bold text-center text-white mb-12">Artikel Berita</h1>
+    <h1 class="text-4xl font-bold text-center mb-12" style="color: var(--text-primary);">Artikel Berita</h1>
 
     <!-- Filter dan Pencarian -->
-    <div class="flex justify-between items-center mb-8">
+    <div class="flex flex-wrap justify-between items-center mb-8 gap-4">
         <!-- Filter Kategori -->
         <form action="{{ route('articles.index') }}" method="GET" class="flex items-center space-x-4">
-            <select name="category" id="category" class="border border-gray-300 rounded px-4 py-2">
+            <select name="category" id="category"
+                    class="border rounded px-4 py-2 focus:outline-none"
+                    style="background-color: var(--background-primary); color: var(--text-primary); border-color: var(--text-secondary);">
                 <option value="">Semua Kategori</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
@@ -17,7 +19,9 @@
                     </option>
                 @endforeach
             </select>
-            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            <button type="submit"
+                    class="px-4 py-2 rounded hover:shadow-md"
+                    style="background-color: var(--button-primary); color: var(--button-text);">
                 Filter
             </button>
         </form>
@@ -25,8 +29,11 @@
         <!-- Pencarian -->
         <form action="{{ route('articles.index') }}" method="GET" class="flex items-center">
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari artikel..."
-                class="border border-gray-300 rounded px-4 py-2 w-64">
-            <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                   class="border rounded px-4 py-2 w-64 focus:outline-none"
+                   style="background-color: var(--background-primary); color: var(--text-primary); border-color: var(--text-secondary);">
+            <button type="submit"
+                    class="ml-2 px-4 py-2 rounded hover:shadow-md"
+                    style="background-color: var(--button-primary); color: var(--button-text);">
                 Cari
             </button>
         </form>
@@ -35,14 +42,16 @@
     <!-- Daftar Artikel -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         @forelse ($articles as $article)
-            <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+            <article class="rounded-lg shadow-lg overflow-hidden transition-all duration-300"
+                     style="background-color: var(--background-secondary); color: var(--text-primary);">
                 <!-- Gambar -->
                 <div class="relative">
                     <img src="{{ $article->image ? asset('storage/' . $article->image) : asset('images/default.jpg') }}"
-                    alt="{{ $article->title }}" class="w-full h-48 object-cover">
+                         alt="{{ $article->title }}" class="w-full h-48 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300">
                         <div class="absolute bottom-0 p-4">
-                            <span class="inline-block px-3 py-1 bg-blue-500 text-white text-xs font-medium rounded-full">
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium"
+                                  style="background-color: var(--button-primary); color: var(--button-text);">
                                 {{ $article->category->name ?? 'Uncategorized' }}
                             </span>
                         </div>
@@ -51,13 +60,15 @@
 
                 <!-- Konten -->
                 <div class="p-6">
-                    <h2 class="text-lg font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300">
-                        <a href="/article/{{ $article->slug }}">{{ $article->title }}</a>
+                    <h2 class="text-lg font-semibold hover:text-blue-600 transition-colors duration-300">
+                        <a href="/article/{{ $article->slug }}" style="color: var(--text-primary);">
+                            {{ $article->title }}
+                        </a>
                     </h2>
-                    <p class="text-sm text-gray-500 mt-2">
+                    <p class="text-sm mt-2" style="color: var(--text-secondary);">
                         {!! Str::limit(strip_tags($article->content), 100) !!}
                     </p>
-                    <div class="flex items-center text-sm text-gray-400 mt-4">
+                    <div class="flex items-center text-sm mt-4" style="color: var(--text-secondary);">
                         <span>{{ $article->author->name ?? 'Unknown' }}</span>
                         <span class="mx-2">•</span>
                         <time>
@@ -69,11 +80,16 @@
                 <!-- Read More -->
                 <div class="px-6 pb-6 mt-auto">
                     <a href="/article/{{ $article->slug }}"
-                        class="inline-block text-blue-500 hover:underline font-medium">Baca Selengkapnya &raquo;</a>
+                       class="inline-block font-medium hover:underline"
+                       style="color: var(--text-link);">
+                        Baca Selengkapnya &raquo;
+                    </a>
                 </div>
             </article>
         @empty
-            <p class="text-white text-center col-span-3">Tidak ada artikel yang ditemukan.</p>
+            <p class="text-center col-span-3" style="color: var(--text-secondary);">
+                Tidak ada artikel yang ditemukan.
+            </p>
         @endforelse
     </div>
 
@@ -83,12 +99,16 @@
     </div>
 </main>
 
-<p class="text-sm text-gray-500 mt-2">
-    @foreach ($article->tags as $tag)
-        <a href="{{ route('articles.index', ['tag' => $tag->name]) }}"
-            class="inline-block bg-blue-100 text-blue-800 text-xs font-medium rounded px-2 py-1 mr-1">
-            #{{ $tag->name }}
-        </a>
-    @endforeach
-</p>
+<!-- Tag Artikel -->
+@if ($articles->isNotEmpty())
+    <p class="text-sm mt-8" style="color: var(--text-secondary);">
+        @foreach ($article->tags as $tag)
+            <a href="{{ route('articles.index', ['tag' => $tag->name]) }}"
+               class="inline-block rounded px-2 py-1 mr-1 text-xs font-medium"
+               style="background-color: var(--button-primary); color: var(--button-text);">
+                #{{ $tag->name }}
+            </a>
+        @endforeach
+    </p>
+@endif
 @endsection

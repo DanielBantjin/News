@@ -4,68 +4,28 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,400;1,500;1,700;1,900&display=swap');
 
-/* Default theme (Light Mode) */
+/* Alternative Light Mode */
 :root {
-    --background-primary: #f5f5f5; /* Latar belakang utama (putih krem) */
-    --background-secondary: #830202; /* Elemen sekunder (merah tua) */
-    --background-gradient-secondary: #830202;
-    --text-primary: #ffffff; /* Teks utama */
-    --text-secondary: #000; /* Teks sekunder */
-    --text-link: #174b93; /* Teks untuk link */
-    --button-primary: #000; /* Tombol utama */
-    --button-hover: red; /* Tombol saat hover */
-    --button-text: #ffffff; /* Teks tombol */
+    --background-primary: #f8f9fa; /* Putih pucat untuk latar belakang utama */
+    --background-secondary: #e9ecef; /* Abu muda untuk elemen sekunder */
+    --text-primary: #343a40; /* Hitam abu-abu untuk teks utama */
+    --text-secondary: #868e96; /* Abu terang untuk teks sekunder */
+    --text-link: #1d72b8; /* Biru netral untuk link */
+    --button-primary: #3b82f6; /* Biru segar untuk tombol */
+    --button-hover: #2563eb; /* Biru lebih gelap saat hover */
+    --button-text: #ffffff; /* Putih untuk teks tombol */
 }
+
 
 /* Dark Mode */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background-primary: #0b0f19;
-        --background-secondary: #34495e;
-        --background-third: #141b29;
-        --background-gradient-primary: #2c3e50;
-        --background-gradient-secondary: #34495e;
-        --text-primary: #ffffff;
-        --text-secondary: #b0b3c1;
-        --text-link: #61dafb;
-        --button-primary: #1a1a2e;
-        --button-hover: #16213e;
-        --button-text: #ffffff;
-    }
+:root.dark {
+    --background-primary: #121212; /* Hitam untuk latar belakang utama */
+    --background-secondary: #1c1c1e; /* Abu gelap untuk elemen sekunder */
+    --text-primary: #e4e4e4; /* Putih terang untuk teks utama */
+    --text-secondary: #b0b3c1; /* Abu terang untuk teks sekunder */
+    --text-link: #61dafb; /* Biru muda untuk link */
+    --button-primary: #bb86fc; /* Ungu cerah untuk tombol */
+    --button-hover: #9b59b6; /* Ungu lebih gelap saat hover */
+    --button-text: #ffffff; /* Putih untuk teks tombol */
 }
 
-/* .flex {
-    margin-left: -2rem;
-    margin-right: 20rem;
-}
-
-
-nav{
-    width: 100%;
-}
-
-.hidden{
-    display: flex;
-    justify-content: space-between;
-   
-}
-
-.relative img{
-    margin-right: 2rem;
-}
-
-.logo-text {
-    color: #ffffff; 
-    font-size: 1.125rem; 
-    font-weight: 600;
-    margin-left: -1rem; 
-    text-transform: uppercase; 
-    letter-spacing: 0.05em; 
-}
-
-.link-menu{
-    display: flex;
-    margin-left: -7rem;
-    padding-right: 5vw;
-} 
-*/
