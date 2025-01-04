@@ -16,8 +16,6 @@ class User extends Authenticatable
         'email',
         'username',
         'password',
-        'theme_preference',
-        'gmail_connected',
         'birthplace',
         'birthdate',
         'gender',
