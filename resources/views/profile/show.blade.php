@@ -30,11 +30,11 @@
                     'email' => 'Email',
                     'contact' => 'Contact',
                     'birthplace' => 'Birthplace',
-                    'birthdate' => 'Birthdate',
                     'gender' => 'Gender',
                 ];
             @endphp
 
+            <!-- Tampilkan Semua Data Kecuali Birthdate -->
             @foreach ($fields as $field => $label)
                 <div>
                     <label class="block text-sm font-medium mb-1" style="color: var(--text-secondary);">
@@ -44,6 +44,17 @@
                 </div>
             @endforeach
 
+            <!-- Birthdate -->
+            <div>
+                <label class="block text-sm font-medium mb-1" style="color: var(--text-secondary);">
+                    Birthdate
+                </label>
+                <p style="color: var(--text-primary);">
+                    {{ Auth::user()->birthdate ? Auth::user()->birthdate->format('Y-m-d') : 'Not set' }}
+                </p>
+            </div>
+
+            <!-- About Me -->
             <div class="col-span-2">
                 <label class="block text-sm font-medium mb-1" style="color: var(--text-secondary);">About Me</label>
                 <p style="color: var(--text-primary);">{{ Auth::user()->about_me }}</p>

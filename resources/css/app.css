@@ -7,7 +7,7 @@
 /* Alternative Light Mode */
 :root {
     --background-primary: #f8f9fa; /* Putih pucat untuk latar belakang utama */
-    --background-secondary: #e9ecef; /* Abu muda untuk elemen sekunder */
+    --background-secondary: #cbcbcc; /* Abu muda untuk elemen sekunder */
     --text-primary: #343a40; /* Hitam abu-abu untuk teks utama */
     --text-secondary: #868e96; /* Abu terang untuk teks sekunder */
     --text-link: #1d72b8; /* Biru netral untuk link */
@@ -19,13 +19,16 @@
 
 /* Dark Mode */
 :root.dark {
-    --background-primary: #121212; /* Hitam untuk latar belakang utama */
-    --background-secondary: #1c1c1e; /* Abu gelap untuk elemen sekunder */
-    --text-primary: #e4e4e4; /* Putih terang untuk teks utama */
-    --text-secondary: #b0b3c1; /* Abu terang untuk teks sekunder */
-    --text-link: #61dafb; /* Biru muda untuk link */
-    --button-primary: #bb86fc; /* Ungu cerah untuk tombol */
-    --button-hover: #9b59b6; /* Ungu lebih gelap saat hover */
-    --button-text: #ffffff; /* Putih untuk teks tombol */
+    --background-primary: #0b0f19;
+    --background-secondary: #141b29;
+    --background-third: #141b29;
+    --background-gradient-primary: #2c3e50;
+    --background-gradient-secondary: #34495e;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b3c1;
+    --text-link: #61dafb;
+    --button-primary: #34495e;
+    --button-hover: #16213e;
+    --button-text: #ffffff;
 }
 

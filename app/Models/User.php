@@ -18,17 +18,18 @@ class User extends Authenticatable
         'password',
         'theme_preference',
         'gmail_connected',
+        'birthplace',
+        'birthdate',
+        'gender',
+    ];
+
+    protected $casts = [
+        'birthdate' => 'date',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'theme_preference' => 'string',
-        'gmail_connected' => 'boolean',
     ];
 
     /**

@@ -5,7 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Winnicode Garuda')</title>
+
+    <!-- Tailwind CSS -->
     @vite('resources/css/app.css')
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-dyB87XVDubHV2BY5KhQFpjE0kpqMJjD8QMWiMEFQhOS1wRlI65uq4DHfQzftjPYy" crossorigin="anonymous">
+
+    <!-- Swiper.js for Carousels -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <!-- Theme Initialization -->
     <script>
@@ -43,5 +54,10 @@
             document.getElementById('theme-icon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
         }
     </script>
+
+    <!-- Swiper.js -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    @yield('scripts')
 </body>
 </html>

@@ -9,6 +9,13 @@
 <body class="bg-gradient-to-br from-gray-900 to-black min-h-screen flex items-center justify-center">
     <div class="bg-gray-800 text-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h1 class="text-2xl font-bold mb-6 text-center">Login ke Winnicode Garuda</h1>
+
+        <!-- Pesan Error -->
+        @if (session('error'))
+            <div class="bg-red-500 text-white p-4 rounded-lg mb-6">
+                {{ session('error') }}
+            </div>
+        @endif
         
         <!-- Form Login -->
         <form action="{{ route('login') }}" method="POST">

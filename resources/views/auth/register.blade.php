@@ -49,14 +49,6 @@
                        required>
             </div>
 
-            <!-- Age -->
-            <div>
-                <label for="age" class="block text-sm font-medium text-gray-700">Umur</label>
-                <input type="number" name="age" id="age" value="{{ old('age') }}"
-                       class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2 focus:ring-purple-500 focus:border-purple-500" 
-                       required>
-            </div>
-
             <!-- Gender -->
             <div>
                 <label for="gender" class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>

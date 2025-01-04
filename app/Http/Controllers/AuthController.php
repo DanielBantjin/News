@@ -15,28 +15,33 @@ class AuthController extends Controller
     }
 
     public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'username' => 'required|string|max:255|unique:users,username',
-            'password' => 'required|string|min:8|confirmed', // Pastikan password dikonfirmasi
-        ]);
-    
-        // Membuat user baru dengan otomatis meng-hash password
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),  // Password di-hash secara eksplisit
-        ]);
-    
-        // Login otomatis setelah registrasi
-        Auth::login($user);
-    
-        return redirect()->route('home')->with('success', 'Registrasi berhasil!');
-    }
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'username' => 'required|string|max:255|unique:users,username',
+        'password' => 'required|string|min:8|confirmed',
+        'birthplace' => 'required|string|max:255',
+        'birthdate' => 'required|date',
+        'gender' => 'required|string|in:Laki-laki,Perempuan',
+    ]);
 
+    // Membuat user baru tanpa hashing password secara manual
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'username' => $request->username,
+        'password' => $request->password, 
+        'birthplace' => $request->birthplace,
+        'birthdate' => $request->birthdate,
+        'gender' => $request->gender,
+    ]);
+
+    // Login otomatis setelah registrasi
+    Auth::login($user);
+
+    return redirect()->route('home')->with('success', 'Registrasi berhasil!');
+}
     public function showLoginForm()
     {
         return view('auth.login');

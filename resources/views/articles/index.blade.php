@@ -99,16 +99,5 @@
     </div>
 </main>
 
-<!-- Tag Artikel -->
-@if ($articles->isNotEmpty())
-    <p class="text-sm mt-8" style="color: var(--text-secondary);">
-        @foreach ($article->tags as $tag)
-            <a href="{{ route('articles.index', ['tag' => $tag->name]) }}"
-               class="inline-block rounded px-2 py-1 mr-1 text-xs font-medium"
-               style="background-color: var(--button-primary); color: var(--button-text);">
-                #{{ $tag->name }}
-            </a>
-        @endforeach
-    </p>
-@endif
+
 @endsection

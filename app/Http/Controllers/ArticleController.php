@@ -183,13 +183,23 @@ class ArticleController extends Controller
     // Beranda dengan artikel terbaru dan trending
     public function home()
     {
+        // Hot News: 5 artikel terbaru berdasarkan tanggal publikasi
         $hotNews = Article::where('status', 'published')
-            ->orderBy('published_at', 'desc')
-            ->take(5)
+            ->orderBy('published_at', 'desc') // Urutkan berdasarkan tanggal publikasi terbaru
+            ->take(5) // Ambil 5 artikel
             ->get();
 
-        $trendingTags = Tag::withCount('articles')->orderBy('articles_count', 'desc')->take(10)->get();
-        $trendingTopics = Article::orderBy('views', 'desc')->take(5)->get();
+        // Trending Tags: 10 tag teratas berdasarkan jumlah artikel
+        $trendingTags = Tag::withCount('articles')
+            ->orderBy('articles_count', 'desc')
+            ->take(10)
+            ->get();
+
+        // Trending Topics: 5 artikel terpopuler berdasarkan views
+        $trendingTopics = Article::where('status', 'published')
+            ->orderBy('views', 'desc') // Berdasarkan views
+            ->take(5)
+            ->get();
 
         return view('home', compact('hotNews', 'trendingTags', 'trendingTopics'));
     }
