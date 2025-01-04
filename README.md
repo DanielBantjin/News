@@ -126,8 +126,18 @@ Buka browser dan akses `http://localhost:8000` untuk melihat aplikasi.
 - **Laravel:** Framework PHP yang digunakan untuk membangun aplikasi.
 - **Tailwind & Alpine.js** Framework front-end untuk styling.
 - **MySQL:** Database yang digunakan untuk pembuatan aplikasi.
-
+- **Laragon:** Sebagai manajemen database dan penyedia server.
+      
+    
+    
+      
+    
 Link database : https://drive.google.com/file/d/1d4hnwvQg9g9L_R2gRdgue6t3HoHiu449/view?usp=sharing
+Link File : https://drive.google.com/file/d/1XCTe2MthyrNnvi4DlQMG0F5SIALx3cKf/view?usp=sharing
+    
+    
+      
+    
 
 ## **Contact**
       
@@ -135,6 +145,8 @@ Link database : https://drive.google.com/file/d/1d4hnwvQg9g9L_R2gRdgue6t3HoHiu44
 Email: danielbancin10@gmail.com
 
 GitHub: https://github.com/danielbantjin
+
+Instagram : danielbantjin
 
 
 
