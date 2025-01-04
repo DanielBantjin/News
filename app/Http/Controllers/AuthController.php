@@ -28,7 +28,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'username' => $request->username,
-            'password' => $request->password,  // Password otomatis di-hash
+            'password' => Hash::make($request->password),  // Password di-hash secara eksplisit
         ]);
     
         // Login otomatis setelah registrasi
@@ -36,7 +36,6 @@ class AuthController extends Controller
     
         return redirect()->route('home')->with('success', 'Registrasi berhasil!');
     }
-    
 
     public function showLoginForm()
     {
@@ -52,7 +51,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Login berhasil!');
+            return redirect()->route('home')->with('success', 'Login berhasil!'); // Mengarahkan ke beranda
         }
 
         return back()->withErrors([
