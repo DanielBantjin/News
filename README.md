@@ -1,12 +1,28 @@
-# README Proyek Manajemen Artikel
+# News Article
 
 ---
 
-## **Ikhtisar Proyek**
+Proyek ini adalah aplikasi berbasis web yang dirancang untuk mengelola artikel dan blog dengan mudah. Aplikasi ini menyediakan tiga menu utama, yaitu:
 
-Proyek ini adalah sistem manajemen artikel berbasis web yang dibangun menggunakan framework Laravel. Sistem ini memungkinkan pengguna untuk membuat, mengedit, mempublikasikan, dan menghapus artikel. Fitur tambahan mencakup penandaan (tagging), kategorisasi, dan penyaringan artikel berdasarkan berbagai kriteria. Sistem juga menyediakan antarmuka publik untuk menampilkan artikel yang telah dipublikasikan, tag yang sedang tren, dan berita terbaru.
+Beranda:
 
----
+-Menampilkan berita terbaru, artikel yang dipublikasikan, dan tag yang sedang tren.
+
+-Memberikan akses cepat ke artikel populer dan informasi terkini.
+
+Artikel:
+
+-Menu ini memungkinkan pengguna untuk membuat, mengedit, mempublikasikan, dan menghapus artikel.
+
+-Artikel dapat dikategorikan, ditandai dengan tag, dan disertai gambar opsional untuk mendukung konten.
+
+-Fitur pencarian, penyaringan, dan pengurutan membantu pengguna menemukan artikel dengan mudah.
+
+Blog:
+
+-Tempat untuk menampilkan kumpulan artikel berdasarkan kategori atau topik tertentu.
+
+-Memungkinkan eksplorasi konten berdasarkan minat pengguna.
 
 ## **Fitur**
 
@@ -41,7 +57,7 @@ Proyek ini adalah sistem manajemen artikel berbasis web yang dibangun menggunaka
 
 ### 1. **Clone Repository**
 ```bash
-git clone https://github.com/username/proyek-manajemen-artikel.git
+git clone https://github.com/danielbantjin/news.git
 cd proyek-manajemen-artikel
 ```
 
@@ -62,20 +78,13 @@ DB_DATABASE=nama_database
 DB_USERNAME=username_database
 DB_PASSWORD=password_database
 ```
-Generate application key:
-```bash
-php artisan key:generate
-```
 
 ### 4. **Migrasi Database**
 Jalankan migrasi untuk membuat tabel-tabel yang diperlukan di database:
 ```bash
 php artisan migrate
 ```
-(Opsional) Jika Anda ingin mengisi database dengan data dummy, jalankan seeder:
-```bash
-php artisan db:seed
-```
+"Jika terjadi masalah ketika melakukan migrasi table bisa donwload database di bawah"
 
 ### 5. **Konfigurasi Penyimpanan Gambar**
 Buat symbolic link untuk mengakses gambar yang diunggah:
@@ -89,12 +98,6 @@ Jalankan server lokal Laravel:
 php artisan serve
 ```
 Buka browser dan akses `http://localhost:8000` untuk melihat aplikasi.
-
-### 7. **(Opsional) Konfigurasi Tambahan**
-- Untuk menggunakan fitur email (misalnya, untuk reset password), sesuaikan konfigurasi email di file `.env`.
-- Jika Anda ingin menggunakan cache atau queue, pastikan untuk mengonfigurasi driver yang sesuai di file `.env`.
-
----
 
 ## **Cara Penggunaan**
 
@@ -121,6 +124,17 @@ Buka browser dan akses `http://localhost:8000` untuk melihat aplikasi.
 ## **Dependensi**
 
 - **Laravel:** Framework PHP yang digunakan untuk membangun aplikasi.
-- **Bootstrap:** Framework front-end untuk styling.
-- **MySQL:** Database yang digunakan untuk menyimpan artikel, kategori, tag, dan informasi pengguna.
+- **Tailwind & Alpine.js** Framework front-end untuk styling.
+- **MySQL:** Database yang digunakan untuk pembuatan aplikasi.
 
+Link database : https://discord.com/channels/@me/904766580628521070/1325174080147816608
+      
+    
+    
+      
+    
+      
+    
+    
+      
+    
