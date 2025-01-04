@@ -138,7 +138,8 @@ GitHub: https://github.com/danielbantjin
 
 
 @Winnicode Garuda Teknologi.
-<img src="img/logo.png" alt="" width="200" />
+<img src="public/img/logo.png" alt="Deskripsi Gambar" width="200" />
+
 
 
 
