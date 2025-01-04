@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('notifications_enabled')->default(true);
+            $table->boolean('is_profile_private')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -35,11 +37,6 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('notifications_enabled')->default(true);
-            $table->boolean('is_profile_private')->default(false);
-        });
     }
 
     /**
@@ -47,14 +44,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
+        // Drop the dependent tables first
         Schema::dropIfExists('sessions');
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('notifications_enabled');
-            $table->dropColumn('is_profile_private');
-        });
-    }
+        Schema::dropIfExists('password_reset_tokens');
 
-    
+        // Then drop the users table
+        Schema::dropIfExists('users');
+    }
 };
