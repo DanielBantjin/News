@@ -44,24 +44,22 @@ class ProfileController extends Controller
 
     $user = Auth::user();
 
-    // Cek apakah ada file yang diunggah
     if ($request->hasFile('profile_picture')) {
-        // Hapus file lama jika ada
+
         if ($user->profile_picture_url && file_exists(public_path($user->profile_picture_url))) {
             unlink(public_path($user->profile_picture_url));
         }
 
-        // Simpan file baru
+
         $file = $request->file('profile_picture');
         $filePath = 'uploads/profile_pictures/';
         $fileName = time() . '_' . $file->getClientOriginalName();
         $file->move(public_path($filePath), $fileName);
 
-        // Simpan path file ke database
+
         $user->profile_picture_url = $filePath . $fileName;
     }
 
-    // Simpan data lainnya
     $user->update([
         'name' => $request->input('name'),
         'username' => $request->input('username'),

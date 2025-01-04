@@ -30,12 +30,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * Mutator for automatically hashing passwords when set.
-     */
+
     public function setPasswordAttribute($value)
     {
-        // Menggunakan Hash::make untuk meng-hash password jika password diberikan
+
         $this->attributes['password'] = Hash::make($value);
     }
 
@@ -48,7 +46,7 @@ class User extends Authenticatable
      */
     public function updatePassword(string $newPassword): bool
     {
-        $this->password = $newPassword; // Mutator will handle hashing
+        $this->password = $newPassword; 
         $result = $this->save();
 
         $this->refresh();

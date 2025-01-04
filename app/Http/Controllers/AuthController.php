@@ -26,7 +26,7 @@ class AuthController extends Controller
         'gender' => 'required|string|in:Laki-laki,Perempuan',
     ]);
 
-    // Membuat user baru tanpa hashing password secara manual
+    // Membuat user baru 
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,

@@ -99,7 +99,6 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize Swiper.js
             new Swiper('.hotNewsSwiper', {
                 slidesPerView: 1,
                 spaceBetween: 20,

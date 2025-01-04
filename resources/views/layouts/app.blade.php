@@ -8,17 +8,12 @@
 
     <!-- Tailwind CSS -->
     @vite('resources/css/app.css')
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-dyB87XVDubHV2BY5KhQFpjE0kpqMJjD8QMWiMEFQhOS1wRlI65uq4DHfQzftjPYy" crossorigin="anonymous">
-
-    <!-- Swiper.js for Carousels -->
+    <!-- Swiper.js -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-
-    <!-- GSAP for animations -->
+    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-    <!-- Theme Initialization -->
     <script>
         const theme = localStorage.getItem('theme') || 'light';
         document.documentElement.className = theme;
@@ -28,7 +23,7 @@
     <!-- Navbar -->
     @include('components.navbar')
 
-    <!-- Main Content Wrapper -->
+    <!-- Main Content -->
     <main class="py-12 px-6" style="background-color: var(--background-primary); color: var(--text-primary); min-height: calc(100vh - 200px);">
         @yield('content')
     </main>
@@ -36,7 +31,7 @@
     <!-- Footer -->
     @include('components.footer')
 
-    <!-- Theme Toggle Button -->
+    <!-- Toggle Button -->
     <div class="fixed bottom-4 right-4">
         <button onclick="toggleTheme()" 
                 class="bg-[var(--button-primary)] text-[var(--button-text)] p-3 rounded-full shadow-md">
@@ -44,7 +39,7 @@
         </button>
     </div>
 
-    <!-- Theme Toggle Script -->
+    <!--Toggle Script -->
     <script>
         function toggleTheme() {
             const currentTheme = document.documentElement.className;

@@ -57,7 +57,7 @@ class BlogController extends Controller
             'image' => $imagePath,
             'author_id' => Auth::id(),
             'status' => 'draft',
-            'published_at' => null, // Pastikan ini null untuk blog draft
+            'published_at' => null, 
         ]);
 
 
@@ -73,15 +73,15 @@ class BlogController extends Controller
 
     public function destroy($id)
     {
-        // Pastikan blog milik pengguna yang sedang login
+       
         $blog = Blog::where('id', $id)->where('author_id', Auth::id())->firstOrFail();
 
-        // Hapus gambar jika ada
+        
         if ($blog->image) {
             Storage::disk('public')->delete($blog->image);
         }
 
-        // Hapus blog
+    
         $blog->delete();
 
         return redirect()->route('myblogs')->with('success', 'Blog berhasil dihapus!');
@@ -126,15 +126,14 @@ class BlogController extends Controller
 
         $blog = Blog::findOrFail($id);
 
-        // Proses update gambar jika ada file baru
+
         if ($request->hasFile('image')) {
             if ($blog->image) {
-                Storage::disk('public')->delete($blog->image); // Hapus gambar lama
+                Storage::disk('public')->delete($blog->image); 
             }
-            $blog->image = $request->file('image')->store('blogs', 'public'); // Simpan gambar baru
+            $blog->image = $request->file('image')->store('blogs', 'public'); 
         }
 
-        // Update data blog
         $blog->update([
             'title' => $validated['title'],
             'content' => $validated['content'],
@@ -159,7 +158,6 @@ class BlogController extends Controller
             $imagePath = $request->file('image')->store('drafts', 'public');
         }
 
-        // Simpan blog ke database dengan status 'draft'
         Blog::create([
             'title' => $validated['title'],
             'slug' => Str::slug($validated['title']),
@@ -175,13 +173,12 @@ class BlogController extends Controller
 
     public function publishDraft(Request $request)
     {
-        // Ambil draft dari database berdasarkan ID yang diberikan
+
         $blog = Blog::where('id', $request->id)
             ->where('status', 'draft')
             ->where('author_id', Auth::id())
             ->firstOrFail();
 
-        // Publikasikan blog
         $blog->update([
             'status' => 'published',
             'published_at' => now(),

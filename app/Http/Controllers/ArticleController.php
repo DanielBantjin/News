@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
-    // Menampilkan semua artikel pengguna yang sedang login
+    // Menampilkan semua artikel
     public function myArticles(Request $request)
     {
         $query = Article::query()->where('author_id', Auth::id());
@@ -22,7 +22,7 @@ class ArticleController extends Controller
             $query->where('category_id', $request->category);
         }
 
-        // Pencarian berdasarkan judul atau konten
+        // Pencarian 
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('title', 'like', '%' . $request->search . '%')
@@ -35,7 +35,7 @@ class ArticleController extends Controller
             $query->where('status', $request->status);
         }
 
-        // Sorting (default: terbaru)
+        // Sorting 
         $sort = $request->get('sort', 'latest');
         $query->orderBy('created_at', $sort === 'latest' ? 'desc' : 'asc');
 
@@ -104,7 +104,7 @@ class ArticleController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
 
-        // Proses upload gambar baru jika ada
+        //  upload gambar
         if ($request->hasFile('image')) {
             if ($article->image) {
                 Storage::disk('public')->delete($article->image);
@@ -172,7 +172,7 @@ class ArticleController extends Controller
         return view('articles.index', compact('articles', 'categories', 'trendingTags'));
     }
 
-    // Membuat artikel baru
+    // Membuat Artikel
     public function create()
     {
         $categories = Category::all();
@@ -180,7 +180,7 @@ class ArticleController extends Controller
         return view('articles.createarticle', compact('categories'));
     }
 
-    // Beranda dengan artikel terbaru dan trending
+    // Beranda,Hot News,Trending
     public function home()
     {
         // Hot News: 5 artikel terbaru berdasarkan tanggal publikasi
@@ -204,7 +204,7 @@ class ArticleController extends Controller
         return view('home', compact('hotNews', 'trendingTags', 'trendingTopics'));
     }
 
-    // Menampilkan artikel berdasarkan slug
+    // Menampilkan artikel dengan slug
     public function show($slug)
     {
         $article = Article::where('slug', $slug)->firstOrFail();

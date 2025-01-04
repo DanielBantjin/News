@@ -43,7 +43,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         tinymce.init({
-            selector: '#content-editor', // Target textarea dengan ID "content-editor"
+            selector: '#content-editor', 
             height: 300,
             menubar: false,
             plugins: [
@@ -55,7 +55,7 @@
                       alignleft aligncenter alignright alignjustify | \
                       bullist numlist outdent indent | removeformat | help',
             content_style: 'body { font-family:Arial,sans-serif; font-size:14px; color: var(--text-primary); background-color: var(--background-primary); }',
-            skin: 'oxide-dark', // Menyesuaikan tema untuk Dark Mode
+            skin: 'oxide-dark', 
             content_css: false
         });
     });

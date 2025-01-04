@@ -113,7 +113,7 @@
         branding: false,
         forced_root_block: false,
         content_style: 'body { font-family:Arial,sans-serif; font-size:14px; color: var(--text-primary); background-color: var(--background-primary); }',
-        skin: 'oxide-dark', // Menyesuaikan tema untuk Dark Mode
+        skin: 'oxide-dark', 
         content_css: false
     });
 </script>
