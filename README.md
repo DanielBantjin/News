@@ -121,6 +121,10 @@ Buka browser dan akses `http://localhost:8000` untuk melihat aplikasi.
 
 ---
 
+//
+User1@example.com (Pass:12345678)
+User2@example.com (Pass:12345678)
+
 ## **Dependensi**
 
 - **Laravel:** Framework PHP yang digunakan untuk membangun aplikasi.
